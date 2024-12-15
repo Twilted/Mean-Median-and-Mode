@@ -1,0 +1,37 @@
+def calculate_mean(numbers)
+  #adds the numbers together in the array and then divides by the count of the numbers in the array
+  sum = numbers.sum
+  mean = sum.to_f / numbers.length
+  mean
+#allows this line of code to work independently
+end
+
+def calculate_median(numbers)
+  #.sort to compare two numbers at a time
+  sorted = numbers.sort
+  len = sorted.length
+  if len.even?
+    (sorted[len / 2 - 1] + sorted[len / 2]) / 2.0
+  else
+    #if odd it adds them all and divdes it by two
+    sorted[len / 2]
+  end
+end
+
+def calculate_mode(numbers)
+  #counts the frequency of each number using hash.new
+  frequency = Hash.new(0)
+  numbers.each { |num| frequency[num] += 1 }
+  #Finds the highest frequency and returns mode or modes of array
+  max_frequency = frequency.values.max
+  mode = frequency.select { |_, freq| freq == max_frequency }.keys
+  
+  mode.length == 1 ? mode[0] : mode
+end
+
+# Samples numbers because I could not find out the best way to allow for user input
+numbers = [1, 2, 2, 3, 4, 5, 5, 5, 6]
+#uses puts to print the data
+puts "Mean: #{calculate_mean(numbers)}"
+puts "Median: #{calculate_median(numbers)}"
+puts "Mode: #{calculate_mode(numbers)}"
